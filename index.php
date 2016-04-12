@@ -1,0 +1,1 @@
+<a href="pages/search.php">SEARCH</a>

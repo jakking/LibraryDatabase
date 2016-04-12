@@ -1,13 +1,7 @@
 <?php
 require_once("../includes/inc.db.php");
 function queryTitle(){
-	try {
-			global $con;
-		    $con = new PDO(DB_CONNECTION_STRING, DB_USER, DB_PWD);
-		    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		} catch (PDOException $e) {
-		    echo $e->getMessage();
-		}
+	$con = connect();
 
 	try {
 	    // input not being sanitized
@@ -48,5 +42,16 @@ function queryTitle(){
  			echo "";
  }
 
+function buildGenres(){
+	$con = connect();
+	$sql = $con->prepare("SELECT name FROM `genre`");
+	$sql->execute();
+	$results =  $sql->fetchAll();
+	foreach($results as $result){
+		echo '
+		<option value="' . $result[0] . '">' . $result[0] . '</option>
+		';
+	}
+}
 
 ?>

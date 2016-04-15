@@ -52,7 +52,23 @@ function queryAuthor(){
 
 function querySummary(){
 	
-	return null;
+	$con = connect();
+
+	try {
+		//base case to select description added a fluff description to clean up code
+	    $query = "SELECT * FROM `search` WHERE id > 0";
+	    //put them in an array by word
+	    $wordArray = explode(' ', $_GET['text']);
+	    foreach($wordArray as $word){
+			$query = $query . " AND description LIKE '%" . $word . "%'";
+		}
+	    $sql = $con->prepare($query);
+	    $sql->execute();
+	    //return array of books
+	    return $sql->fetchAll();            
+	} catch(PDOException $e) {
+	    echo  $e->getMessage();
+	}
 }
  function buildTable($results){
  	echo '
@@ -67,7 +83,7 @@ function querySummary(){
  	foreach($results as $result){
         echo        '
     	<tr>
-   		     <td> ' . $result[1] . '</td>
+   		     <td> <a href= "info.php?id=' . $result[0] . '">' . $result[1] . '</a></td>
              <td> ' . $result[2] . '</td>
              <td> ' . $result[3] . '</td>
              <td> ' . $result[4] . '</td>
@@ -78,7 +94,7 @@ function querySummary(){
 
  function textInput(){
  		if (isset($_GET['submitted']))
- 			echo $_GET['text'];
+ 			echo '"' . $_GET['text'] . '"';
  		else
  			echo "";
  }

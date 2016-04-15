@@ -1,1 +1,6 @@
-<a href="pages/search.php">SEARCH</a>
+<?php
+
+require_once("includes/inc.header.php");
+
+?>
+<h1>Home Page</h1>

@@ -1,4 +1,5 @@
 <?php
+require_once("../includes/inc.header.php");
 require_once("../includes/inc.search.php");
 ?>
 <form class="form-group" role="search" action="search.php">

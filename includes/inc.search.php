@@ -4,14 +4,55 @@ function queryTitle(){
 	$con = connect();
 
 	try {
-	    // input not being sanitized
-    	$sql = $con->prepare("SELECT * FROM `search` WHERE `name` REGEXP (:title)");
-	    $sql->bindParam(':title', $_GET['title']);
+		//base case to select titles
+	    $query = "SELECT * FROM `search` WHERE `name` REGEXP (:title) ";
+	    //if they select a category that is not all
+	    if ($_GET['genre'] != "ALL"){
+			$query = $query . "AND genre =  (:genre)";
+			$sql = $con->prepare($query);
+			$sql->bindParam(':genre', $_GET['genre']);
+		}
+		else{
+			$sql = $con->prepare($query);
+		}
+		//replace title
+	    $sql->bindParam(':title', $_GET['text']);
 	    $sql->execute();
+	    //return array of books
 	    return $sql->fetchAll();            
 	} catch(PDOException $e) {
 	    echo  $e->getMessage();
 	}
+}
+
+function queryAuthor(){
+	$con = connect();
+
+	try {
+		//base case to select authors
+	    $query = "SELECT * FROM `search` WHERE `author` REGEXP (:auth) ";
+	    //if they select a category that is not all
+	    if ($_GET['genre'] != "ALL"){
+			$query = $query . "AND genre =  (:genre)";
+			$sql = $con->prepare($query);
+			$sql->bindParam(':genre', $_GET['genre']);
+		}
+		else{
+			$sql = $con->prepare($query);
+		}
+		//replace author
+	    $sql->bindParam(':auth', $_GET['text']);
+	    $sql->execute();
+	    //return array of books
+	    return $sql->fetchAll();            
+	} catch(PDOException $e) {
+	    echo  $e->getMessage();
+	}
+}
+
+function querySummary(){
+	
+	return null;
 }
  function buildTable($results){
  	echo '
@@ -37,7 +78,7 @@ function queryTitle(){
 
  function textInput(){
  		if (isset($_GET['submitted']))
- 			echo $_GET['title'];
+ 			echo $_GET['text'];
  		else
  			echo "";
  }
@@ -47,9 +88,52 @@ function buildGenres(){
 	$sql = $con->prepare("SELECT name FROM `genre`");
 	$sql->execute();
 	$results =  $sql->fetchAll();
-	foreach($results as $result){
+	if(isset($_GET['genre'])){
 		echo '
-		<option value="' . $result[0] . '">' . $result[0] . '</option>
+		    		<option value="ALL">ALL</option>
+		    ';
+	}
+	else{
+		echo '
+					<option value="ALL" selected="selected">ALL</option>
+		';
+	}
+	foreach($results as $result){
+		if (strcasecmp($result[0], $_GET['genre'])==0){
+			echo '
+			<option selected = "selected" value="' . $result[0] . '">' . $result[0] . '</option>
+			';
+		}
+		else{
+			echo '
+			<option value="' . $result[0] . '">' . $result[0] . '</option>
+			';
+		}
+	}
+	
+}
+
+function buildRadioButtons(){
+	//default title is checked
+	if (!isset($_GET['searchType']) || (strcasecmp($_GET['searchType'], "title")==0)){
+		echo'
+		<input type="radio" name="searchType" value="title" checked> Title<br>
+		<input type="radio" name="searchType" value="author"> Author<br>
+		<input type="radio" name="searchType" value="summary"> Summary  
+		';
+	}
+	else if (strcasecmp($_GET['searchType'], "author")==0){
+		echo'
+		<input type="radio" name="searchType" value="title"> Title<br>
+		<input type="radio" name="searchType" value="author" checked> Author<br>
+		<input type="radio" name="searchType" value="summary"> Summary
+		';
+	}
+	else{
+		echo'
+		<input type="radio" name="searchType" value="title"> Title<br>
+		<input type="radio" name="searchType" value="author"> Author<br>
+		<input type="radio" name="searchType" value="summary" checked> Summary
 		';
 	}
 }

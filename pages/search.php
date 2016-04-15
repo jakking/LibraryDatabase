@@ -16,7 +16,7 @@ require_once("../includes/inc.search.php");
 	</div> 
 	<input type="submit" name="submitted" value="SEARCH">
 </form>
-<table>
+<table class="table">
 <?php 
 	if (isset($_GET['submitted'])){
 		if ($_GET['text'] != ""){

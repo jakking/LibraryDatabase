@@ -33,12 +33,15 @@ function buildInfo(){
 
 //get availibilty of books
 function availibilityTable(){
-	echo '<table>
+	echo '<table class="table">
+		  <thead class="thead">
 			  <tr>
-				  <th align="left">Library Name</th>
-				  <th align="center">Books Available</th>
-				  <th align="center">Total Books</th>
-			   </tr>';
+				  <th>Library Name</th>
+				  <th>Books Available</th>
+				  <th>Total Books</th>
+			   </tr>
+		  </thead>
+				  ';
 			   
     $con = connect();
 	try {
@@ -66,8 +69,8 @@ function availibilityTable(){
 			
 			echo '<tr>
 					  <td>' . $library[0] . '</td>
-					  <td align="center">' . $totalAvailable[0] . '</td>
-					  <td align="center">' . $total[0] . '</td>
+					  <td>' . $totalAvailable[0] . '</td>
+					  <td>' . $total[0] . '</td>
 			      </tr>';
 		}
 	} catch(PDOException $e) {

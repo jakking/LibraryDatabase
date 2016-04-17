@@ -1,5 +1,6 @@
 
-<?php echo 'username =' .$_SESSION['username'];?>
+<?php
+echo 'username =' . $_SESSION['username'];?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

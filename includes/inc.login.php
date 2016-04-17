@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("../includes/inc.db.php");
 
 if(isset($_POST['login']))

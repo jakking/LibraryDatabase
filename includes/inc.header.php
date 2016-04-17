@@ -1,6 +1,3 @@
-
-<?php
-echo 'username =' . $_SESSION['username'];?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -23,18 +20,19 @@ echo 'username =' . $_SESSION['username'];?>
 							<ul class="nav navbar-nav">
 								<li><a href="/cs434Project/pages/search.php">SEARCH<br>LITERATURE</a></li>
 								<?php
+								if(isset($_SESSION['username'])){
 									if($_SESSION['clearence']>1){
 										echo '<li><a href="#">SEARCH<br>EMPLOYEES</a></li>
 											  <li><a href="#">SEARCH<br>CUSTOMERS</a></li>
 											  <li><a href="#">INSERT<br>INTO</a></li>';
 									}
+								}
 								?>
 							</ul>
 							<ul class="nav navbar-nav navbar-right">
 								<?php 
 								if (isset( $_SESSION['clearence'])){
-									session_destroy();
-									echo '<li><a href="/cs434Project/">LOGOUT</a></li>';
+									echo '<li><a href="/cs434Project/index?close=true">LOGOUT</a></li>';
 								}
 								else{
 									echo '<li><a href="/cs434Project/pages/login.php">LOGIN</a></li';

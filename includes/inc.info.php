@@ -1,6 +1,5 @@
 <?php
 require_once("../includes/inc.db.php");
-
 //gets the literature by the GET id
 function getLiterature(){
 	$con = connect();
@@ -72,6 +71,16 @@ function availibilityTable(){
 					  <td>' . $totalAvailable[0] . '</td>
 					  <td>' . $total[0] . '</td>
 			      </tr>';
+		}
+		echo'
+		</table>';
+		echo 'username =' .$_SESSION['username'];
+		if ($_SESSION['clearence']==1){
+			echo'
+				<form action="../pages/placeHold.php?id=' . $_GET['id'] . '" method="POST">
+				<input type=submit name="hold" value="PLACE HOLD">
+				</form>
+				';
 		}
 	} catch(PDOException $e) {
 	    echo  $e->getMessage();

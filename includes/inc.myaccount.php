@@ -20,6 +20,7 @@ function buildHolds(){
  		<tr>
 			<th align="left">Book Name</th>
 			<th align="left">Library Rented From</th>
+			<th align="left">Hold Date</th>
 		</tr>
 		';
 		foreach($results as $result){
@@ -34,6 +35,7 @@ function buildHolds(){
 			<tr>
 				<td>' . $name[0] . '</td>
 				<td> ' . $result[3] . '</td>
+				<td> ' . $result[5] . '</td>
              </tr>
                     ';
 		}

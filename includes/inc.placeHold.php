@@ -23,7 +23,7 @@ function processHold(){
 				$sql->bindParam(':username', $_SESSION['username']);
 				$sql->execute();
 				$resultCust = $sql->fetch();
-				$sql = $con->prepare("INSERT INTO holds (customerID, litLookUpID, libraryName, libAddKey) VALUES(" . $resultCust[0] . ", " . $result[0] . ", :libname , :libaddress)");
+				$sql = $con->prepare("INSERT INTO holds (customerID, litLookUpID, libraryName, libAddKey, holdDate) VALUES(" . $resultCust[0] . ", " . $result[0] . ", :libname , :libaddress, '".  date("Y/m/d") ."')");
 				$sql->bindParam(':libname', $_SESSION['libraryName']);
 				$sql->bindParam(':libaddress', $_SESSION['libAddressKey']);
 				$sql->execute();

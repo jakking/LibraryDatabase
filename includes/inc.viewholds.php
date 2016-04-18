@@ -17,6 +17,7 @@ function getHolds(){
 			<th align="left">Customer Name</th>
 			<th align="left">Book ID</th>
 			<th align="left">Book Name</th>
+			<th align="left">Hold Start Date</th>
 		</tr>
 		';
 		
@@ -39,9 +40,9 @@ function getHolds(){
 				<td>' . $custResults[0] . '</td>
 				<td>' . $result[2] . '</td>
 				<td>' . $name[0] . '</td>
-				<td><form action = "cancelhold.php?id= ' . $result[0] . ' method" = "POST"><input type=submit name="cancel" value="Cancel Hold"></form></td>
-				<td><form action = "checkout.php?id= ' . $result[2] . ' method" = "POST"><input type=submit name="checkout" value="Checkout"></form></td>
-				<td>' . $name[0] . '</td>
+				<td>' . $result[5] . '</td>
+				<td><a href="cancelhold.php?id=' . $result[2] . '">Cancel Hold</a></td>
+				<td><a href="checkout.php?id=' . $result[2] . '&customerid='. $result[1] . '">Checkout</a></td>
              </tr>
                     ';
 		}

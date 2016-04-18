@@ -41,8 +41,8 @@ function getHolds(){
 				<td>' . $result[2] . '</td>
 				<td>' . $name[0] . '</td>
 				<td>' . $result[5] . '</td>
-				<td><a href="cancelhold.php?id=' . $result[2] . '">Cancel Hold</a></td>
 				<td><a href="checkout.php?id=' . $result[2] . '&customerid='. $result[1] . '">Checkout</a></td>
+				<td><a href="cancelhold.php?id=' . $result[2] . '">Cancel Hold</a></td>
              </tr>
                     ';
 		}

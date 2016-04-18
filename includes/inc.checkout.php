@@ -1,0 +1,26 @@
+<?php
+
+require_once("../includes/inc.db.php");
+
+function checkout(){
+	$con = connect();
+	try {
+		$sql = $con->prepare("INSERT INTO customerborrows (custID, lenderLName, lenderLAddressKey, checkoutdate, litlookupID) VALUES(:custID, :libname, :libaddress, '" . date("Y/m/d") . "', :litID)");
+		$sql->bindParam(':custID', $_GET['customerid']);
+		$sql->bindParam(':libname', $_SESSION['libraryName']);
+		$sql->bindParam(':libaddress', $_SESSION['libAddressKey']);
+		$sql->bindParam(':litID', $_GET['id']);
+		$sql->execute();
+		$sql = $con->prepare("DELETE FROM holds where litLookUpID = :bookid");
+		$sql->bindParam(':bookid', $_GET['id']);
+		$sql->execute();
+		echo '
+		<h2>Book checked out successfully!</h2>
+		';
+	}catch(PDOException $e){
+       echo $e->getMessage();
+	}
+	
+}
+
+?>

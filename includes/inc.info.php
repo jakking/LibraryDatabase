@@ -74,7 +74,6 @@ function availibilityTable(){
 		}
 		echo'
 		</table>';
-		echo 'username =' .$_SESSION['username'];
 		if ($_SESSION['clearence']==1){
 			echo'
 				<form action="../pages/placeHold.php?id=' . $_GET['id'] . '" method="POST">

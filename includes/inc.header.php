@@ -32,7 +32,7 @@
 							<ul class="nav navbar-nav navbar-right">
 								<?php 
 								if (isset( $_SESSION['clearence'])){
-									echo '<li><a href="/cs434Project/index?close=true">LOGOUT</a></li>';
+									echo '<li><a href="/cs434Project/index.php?close=true">LOGOUT</a></li>';
 								}
 								else{
 									echo '<li><a href="/cs434Project/pages/login.php">LOGIN</a></li';

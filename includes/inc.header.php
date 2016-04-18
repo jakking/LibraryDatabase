@@ -36,7 +36,7 @@ require_once("../includes/inc.db.php");
 											} catch(PDOException $e){
 											echo $e->getMessage();
 											}
-										echo '<li><a href="viewholds.php">VIEW<br>HOLDS(' . $result[0] . ')</a></li>
+										echo '<li><a href="/pages/viewholds.php">VIEW<br>HOLDS(' . $result[0] . ')</a></li>
 											  <li><a href="#">SEARCH<br>CUSTOMERS</a></li>
 											  <li><a href="#">INSERT<br>INTO</a></li>';
 									}

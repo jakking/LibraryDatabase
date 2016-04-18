@@ -48,7 +48,7 @@ function buildHolds(){
 }
 
 function buildCheckedOut(){
-	echo '<h1>Current Checkouts:</h1>';
+	echo '<h1>Checkouts:</h1>';
 	$con = connect();
 	try {
 		//get checkout according to customer id
@@ -57,7 +57,7 @@ function buildCheckedOut(){
 		$sql->execute();
 		$result = $sql->fetch();
 		//get all borrows
-		$sql = $con->prepare("SELECT * FROM `customerborrows` WHERE custID = " . $result[0]);
+		$sql = $con->prepare("SELECT * FROM `customerborrows` WHERE custID = " . $result[0] . " ORDER BY checkoutDate");
 		$sql->execute();
 		$results = $sql->fetchAll();
 		//start builing table
@@ -67,6 +67,7 @@ function buildCheckedOut(){
 			<th align="left">Book Name</th>
 			<th align="left">Library Rented From</th>
 			<th align="left">Rent Date</th>
+			<th align="left">Checkin Date</th>
 		</tr>
 		';
 		foreach($results as $result){
@@ -82,8 +83,17 @@ function buildCheckedOut(){
 				<td>' . $name[0] . '</td>
 				<td> ' . $result[2] . '</td>
 				<td> ' . $result[4] . '</td>
-             </tr>
+				';
+			if($result[5]=="0000-00-00"){
+				echo '<td> Not checked in yet.</td>
+					 ';
+			}
+			else{
+				echo '
+				<td> ' . $result[5] . '</td>
+				</tr>
                     ';
+				}
 		}
 		echo '
 		</table>';

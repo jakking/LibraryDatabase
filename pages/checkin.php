@@ -15,7 +15,7 @@ if(isset($_SESSION['clearence'])){
 			$sql->bindParam(':litid', $_GET['id']);
 			$sql->execute();
 			echo '
-			<h2>Hold deleted successfully!</h2>
+			<h2>Book checked back in!</h2>
 			';
 		}catch(PDOException $e){
 		echo $e->getMessage();

@@ -38,7 +38,7 @@ require_once("../includes/inc.db.php");
 											}
 										echo '<li><a href="../pages/viewholds.php">VIEW<br>HOLDS(' . $result[0] . ')</a></li>
 											  <li><a href="../pages/checkintable.php">CHECKIN<br>BOOK</a></li>
-											  <li><a href="#">INSERT<br>CUSTOMER</a></li>';
+											  <li><a href="../pages/insertcustomer.php">INSERT<br>CUSTOMER</a></li>';
 									}
 								}
 								?>

@@ -7,9 +7,11 @@ if(isset($_SESSION['clearence'])){
 		require_once("../includes/inc.db.php");
 		$con = connect();
 		try {
+			//get change book to checked in
 			$sql = $con->prepare("UPDATE litlookup SET checkedOut=false where id = :id");
 			$sql->bindParam(':id', $_GET['id']);
 			$sql->execute();
+			//update for checkin date
 			$sql = $con->prepare("UPDATE customerborrows SET checkinDATE = '" .  date("Y/m/d") . "' where custID = :custid AND litlookupID = :litid");
 			$sql->bindParam(':custid', $_GET['customerid']);
 			$sql->bindParam(':litid', $_GET['id']);
@@ -22,6 +24,7 @@ if(isset($_SESSION['clearence'])){
 		}
 	}
 	else{
+		//protection against session not being the right clearence
 		echo '<h1>ACCESS DENIED</h1>';
 	}
 }

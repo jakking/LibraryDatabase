@@ -3,6 +3,7 @@ session_start();
 
 require_once("includes/inc.viewHolds.php");
 if(isset($_SESSION['clearence'])){
+	//if you are a librarian and manager
 	if($_SESSION['clearence']>1){
 		require_once("../includes/inc.header.php");
 		getHolds();

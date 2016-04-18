@@ -34,6 +34,7 @@ function getHolds(){
 			$sql = $con->prepare("SELECT name FROM `literature` WHERE id = " . $litID[0]);
 			$sql->execute();
 			$name = $sql->fetch();
+			//build rows
 			echo'
 			<tr>
 				<td>' . $result[1] . '</td>

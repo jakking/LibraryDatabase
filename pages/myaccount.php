@@ -7,6 +7,7 @@ if($_SESSION['clearence']==1){
 	buildCheckedOut();
 }
 else{
+	//protection if a session isnt started
 echo '<h1>Access Denied</h1>';
 }
 ?> 

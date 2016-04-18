@@ -37,6 +37,7 @@ require_once("includes/inc.db.php");
 											} catch(PDOException $e){
 											echo $e->getMessage();
 											}
+											//if higher clearence than a customer
 										echo '<li><a href="pages/viewholds.php">VIEW<br>HOLDS(' . $result[0] . ')</a></li>
 											  <li><a href="pages/checkintable.php">CHECKIN<br>BOOK</a></li>
 											  <li><a href="#">INSERT<br>CUSTOMER</a></li>';

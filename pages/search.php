@@ -19,6 +19,7 @@ require_once("../includes/inc.search.php");
 </form>
 <table class="table">
 <?php 
+	//search depending on the form that was submitted
 	if (isset($_GET['submitted'])){
 		if ($_GET['text'] != ""){
 			if ($_GET['searchType'] == "title"){

@@ -1,3 +1,6 @@
+<?php
+require_once("../includes/inc.db.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -20,9 +23,20 @@
 							<ul class="nav navbar-nav">
 								<li><a href="/cs434Project/pages/search.php">SEARCH<br>LITERATURE</a></li>
 								<?php
-								if(isset($_SESSION['username'])){
-									if($_SESSION['clearence']>1){
-										echo '<li><a href="#">SEARCH<br>EMPLOYEES</a></li>
+								if(isset($_SESSION['username'])){if ($_SESSION['clearence']==1){
+										echo '<li><a href="myaccount.php">MY<br>ACCOUNT</a></li>';
+									}
+									else if($_SESSION['clearence']>1){
+										$con = connect();
+										try {
+											$sql = $con->prepare("SELECT COUNT(*) FROM `holds` WHERE `libraryName` = :libname");
+											$sql->bindParam(':libname', $_SESSION['libraryName']);
+											$sql->execute();
+											$result = $sql->fetch();
+											} catch(PDOException $e){
+											echo $e->getMessage();
+											}
+										echo '<li><a href="viewholds.php">VIEW<br>HOLDS(' . $result[0] . ')</a></li>
 											  <li><a href="#">SEARCH<br>CUSTOMERS</a></li>
 											  <li><a href="#">INSERT<br>INTO</a></li>';
 									}
@@ -32,7 +46,7 @@
 							<ul class="nav navbar-nav navbar-right">
 								<?php 
 								if (isset( $_SESSION['clearence'])){
-									echo '<li><a href="/cs434Project/index.php?close=true">LOGOUT</a></li>';
+									echo '<li><a href="/cs434Project/pages/logout.php">LOGOUT</a></li>';
 								}
 								else{
 									echo '<li><a href="/cs434Project/pages/login.php">LOGIN</a></li';

@@ -1,8 +1,6 @@
 <?php
 session_start();
-if(isset($_GET['close'])){
-    session_destroy();
-}
-require_once("includes/inc.header.php");
+require_once("includes/inc.headerhome.php");
+//echo password_hash("lpassword", PASSWORD_DEFAULT);
 ?>
 <h1>Home Page</h1>

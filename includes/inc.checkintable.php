@@ -37,7 +37,7 @@ function checkinTable(){
 			<tr>
 				<td>' . $result[1] . '</td>
 				<td>' . $custResults[0] . '</td>
-				<td>' . $result[2] . '</td>
+				<td>' . $result[6] . '</td>
 				<td>' . $name[0] . '</td>
 				<td>' . $result[4] . '</td>
 				<td><a href="checkin.php?id=' . $result[6] . '&customerid='. $result[1] . '">Checkin</a></td>

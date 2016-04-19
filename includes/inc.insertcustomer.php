@@ -4,7 +4,7 @@ function printForm(){
 	<link href="../css/insert.form.css" rel="stylesheet">
 
 	<div class="container" >
-		<form class="form-signin" action="insertcustomer.php" method="GET">
+		<form class="form-signin" action="insertcustomer.php" method="POST">
 			<h2 class="form-signin-heading">Insert information about customer below.</h2>
 			<label for="inputName" class="sr-only">Name: </label>
 			<input type="text" id="inputName" class="form-control" name="Name" placeholder="First Name Last Name" required autofocus>

@@ -28,8 +28,8 @@ if(isset($_SESSION['clearence'])){
 					$sql = $con->prepare("INSERT INTO login (username, password, libraryName, libAddressKey, clearence) VALUES(:username, :password, :libraryname, :libraryAddressKey, 1)");
 					$sql->bindParam(':username', $_POST['username']);
 					$sql->bindParam(':password', password_hash($_POST['password'], PASSWORD_DEFAULT));
-					$sql->bindParam(':libraryname', $SESSION['libraryName']);
-					$sql->bindParam(':libraryAddressKey', $_POST['libAddressKey']);
+					$sql->bindParam(':libraryname', $_SESSION['libraryName']);
+					$sql->bindParam(':libraryAddressKey', $_SESSION['libAddressKey']);
 					$sql->execute();
 					echo '
 					<h2>Addition Success!</h2>

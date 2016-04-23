@@ -87,4 +87,38 @@ function availibilityTable(){
 	
 }
 
+function getNext(){
+	
+	$con = connect();
+	try {
+		$query = "SELECT l2.name, l2.id, count(l2.id) " .
+				  "FROM customerborrows b1, customerborrows b2, literature l1, literature l2, litlookup ll1, litlookup ll2 " .
+				  "WHERE b1.litlookupID = ll1.id " . 
+				  "AND ll1.litID = l1.id " .
+				  "AND l1.id = " . $_GET['id'] . " " .
+				  "AND b1.id < b2.id " .
+				  "AND b1.custID = b2.custID " .
+				  "AND b1.checkoutDate < b2.checkoutDate " .
+				  "AND b2.litlookupID = ll2.id " .
+				  "AND ll2.litID = l2.id " . 
+				  "GROUP BY l2.id " .
+				  "ORDER BY count(l2.id) DESC";
+		echo $query . '<br><br>';
+	    $sql = $con->prepare($query);
+	    //$sql->bindParam(':id', $_GET['id']);
+	    $sql->execute();
+	    $results = $sql->fetchAll();
+		if($sql->rowCount() > 0){
+			echo '
+			<h3>Patrons who enjoyed this book also enjoyed:</h3>
+			<p> <a href = "info.php?id=' . $results[0][1] . '">' . $results[0][0] . '</a></p>
+			';
+			
+		}
+	} catch(PDOException $e) {
+	    echo  $e->getMessage();
+	}
+	
+}
+
 ?>

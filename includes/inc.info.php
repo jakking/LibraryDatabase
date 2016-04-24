@@ -95,7 +95,7 @@ function getNext(){
 				  "FROM customerborrows b1, customerborrows b2, literature l1, literature l2, litlookup ll1, litlookup ll2 " .
 				  "WHERE b1.litlookupID = ll1.id " . 
 				  "AND ll1.litID = l1.id " .
-				  "AND l1.id = " . $_GET['id'] . " " .
+				  "AND l1.id = :id " .
 				  "AND b1.id < b2.id " .
 				  "AND b1.custID = b2.custID " .
 				  "AND b1.checkoutDate < b2.checkoutDate " .
@@ -103,9 +103,8 @@ function getNext(){
 				  "AND ll2.litID = l2.id " . 
 				  "GROUP BY l2.id " .
 				  "ORDER BY count(l2.id) DESC";
-		echo $query . '<br><br>';
 	    $sql = $con->prepare($query);
-	    //$sql->bindParam(':id', $_GET['id']);
+	    $sql->bindParam(':id', $_GET['id']);
 	    $sql->execute();
 	    $results = $sql->fetchAll();
 		if($sql->rowCount() > 0){

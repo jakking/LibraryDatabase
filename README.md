@@ -22,5 +22,6 @@ Install the LAMP stack
 ```bash
 sudo apt-get install lamp-server^
 ```
+Make a /includes/inc.db.php file, with a return connection to your database.
 
 place the website in the correct folder for LAMP server, then you can visit the website on the port you have LAMP server set up on.
